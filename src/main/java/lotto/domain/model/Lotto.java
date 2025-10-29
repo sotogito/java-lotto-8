@@ -3,6 +3,7 @@ package lotto.domain.model;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import lotto.common.LottoPolicy;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -20,7 +21,7 @@ public class Lotto {
     }
 
     private void validateNumberSize(List<Integer> numbers) {
-        if (numbers.size() != 6) {
+        if (numbers.size() != LottoPolicy.MAIN_LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
         }
     }
@@ -30,7 +31,8 @@ public class Lotto {
             if (number == null) {
                 throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
             }
-            if (number < 1 || number > 45) {
+            if (number < LottoPolicy.LOTTO_MIN_NUMBER
+                    || number > LottoPolicy.LOTTO_MAX_NUMBER) {
                 throw new IllegalArgumentException("로또 번호 범위는 1~45까지 입니다.");
             }
         }
