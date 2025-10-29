@@ -8,7 +8,7 @@ import lotto.domain.port.outbound.LottoNumberMakerPort;
 public class PurchasedLottos {
     private final List<Lotto> lottos;
 
-    public PurchasedLottos(List<Lotto> lottos) {
+    private PurchasedLottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 
