@@ -17,11 +17,7 @@ public class PurchasedLottos {
         List<Lotto> purchasedLottos = new ArrayList<>();
 
         for (int i = 0; i < purchasedQuantity; i++) {
-            try {
-                purchasedLottos.add(new Lotto(lottoNumberMaker.make()));
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("예기치 못한 오류가 발생했습니다.");
-            }
+            purchasedLottos.add(new Lotto(lottoNumberMaker.make()));
         }
         return new PurchasedLottos(purchasedLottos);
     }

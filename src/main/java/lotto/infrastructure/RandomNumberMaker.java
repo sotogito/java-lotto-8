@@ -9,11 +9,15 @@ public class RandomNumberMaker implements LottoNumberMakerPort {
 
     @Override
     public List<Integer> make() {
-        return Randoms.pickUniqueNumbersInRange(
-                LottoPolicy.LOTTO_MIN_NUMBER,
-                LottoPolicy.LOTTO_MAX_NUMBER,
-                LottoPolicy.MAIN_LOTTO_NUMBER_COUNT
-        );
+        try {
+            return Randoms.pickUniqueNumbersInRange(
+                    LottoPolicy.LOTTO_MIN_NUMBER,
+                    LottoPolicy.LOTTO_MAX_NUMBER,
+                    LottoPolicy.MAIN_LOTTO_NUMBER_COUNT
+            );
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("예기치 못한 오류가 발생했습니다.");
+        }
     }
 
 }
