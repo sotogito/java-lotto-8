@@ -42,7 +42,7 @@ public class Lotto {
     private void validateDuplicationNumbers(List<Integer> numbers) {
         Set<Integer> noDuplication = new HashSet<>(numbers);
         if (noDuplication.size() != numbers.size()) {
-            throw new RereadRequestException("로또 번호를 허용하지 않습니다.");
+            throw new RereadRequestException("중복된 로또 번호가 있습니다.");
         }
     }
 
