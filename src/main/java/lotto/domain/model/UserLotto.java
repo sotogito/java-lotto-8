@@ -9,7 +9,7 @@ public class UserLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public static UserLotto createUserLotto(Lotto mainLotto, Integer bonusNumber) {
+    public static UserLotto create(Lotto mainLotto, Integer bonusNumber) {
         if (bonusNumber == null) {
             throw new IllegalArgumentException("보너스 번호를 입력해주세요.");
         }
