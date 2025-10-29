@@ -1,6 +1,6 @@
 package lotto.domain.vo;
 
-import lotto.common.LottoPolicy;
+import lotto.common.constants.LottoPolicy;
 import lotto.common.exception.RereadRequestException;
 
 public class Money {

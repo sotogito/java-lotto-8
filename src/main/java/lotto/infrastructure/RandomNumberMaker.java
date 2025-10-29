@@ -2,7 +2,7 @@ package lotto.infrastructure;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
-import lotto.common.LottoPolicy;
+import lotto.common.constants.LottoPolicy;
 import lotto.domain.port.outbound.LottoNumberMakerPort;
 
 public class RandomNumberMaker implements LottoNumberMakerPort {

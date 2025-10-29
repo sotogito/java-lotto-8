@@ -3,7 +3,7 @@ package lotto.domain.model;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import lotto.common.LottoPolicy;
+import lotto.common.constants.LottoPolicy;
 import lotto.common.exception.RereadRequestException;
 
 public class Lotto {

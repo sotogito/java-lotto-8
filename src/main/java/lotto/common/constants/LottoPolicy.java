@@ -1,4 +1,4 @@
-package lotto.common;
+package lotto.common.constants;
 
 public class LottoPolicy {
     public final static int LOTTO_PRICE = 1_000;
