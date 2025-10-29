@@ -1,6 +1,6 @@
 package lotto.domain.service;
 
-import lotto.application.response.PurchasedLottoResponse;
+import lotto.application.dto.PurchasedLottoDto;
 import lotto.domain.model.PurchasedLottos;
 import lotto.domain.port.inbound.LottoUseCase;
 import lotto.domain.port.outbound.LottoNumberMakerPort;
@@ -14,14 +14,14 @@ public class LottoService implements LottoUseCase {
     }
 
     @Override
-    public PurchasedLottoResponse purchase(Integer amount) {
+    public PurchasedLottoDto purchase(Integer amount) {
         Money money = new Money(amount);
         int purchasedQuantity = money.calculatePurchasedQuantity();
 
-        PurchasedLottos purchasedLottos =
+        PurchasedLottos purchasedLottos = /// 만야겡 여기서 예외가 터진다면.. 다시 입력을 받아야하잖아
                 PurchasedLottos.create(purchasedQuantity, LottoNumberMakerPort);
 
-        return new PurchasedLottoResponse(purchasedQuantity, purchasedLottos.toString());
+        return new PurchasedLottoDto(money, purchasedLottos);
     }
 
 }

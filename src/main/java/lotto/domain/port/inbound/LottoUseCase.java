@@ -1,9 +1,9 @@
 package lotto.domain.port.inbound;
 
-import lotto.application.response.PurchasedLottoResponse;
+import lotto.application.dto.PurchasedLottoDto;
 
 public interface LottoUseCase {
 
-    PurchasedLottoResponse purchase(Integer amount);
+    PurchasedLottoDto purchase(Integer amount);
 
 }
