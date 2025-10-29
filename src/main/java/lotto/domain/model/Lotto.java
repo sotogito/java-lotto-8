@@ -9,7 +9,7 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validateNumberSize(numbers);
-        validateNumbers(numbers);
+        validateNumbersRange(numbers);
         validateDuplicationNumbers(numbers);
 
         this.numbers = numbers;
@@ -21,7 +21,7 @@ public class Lotto {
         }
     }
 
-    private void validateNumbers(List<Integer> numbers) {
+    private void validateNumbersRange(List<Integer> numbers) {
         for (Integer number : numbers) {
             if (number == null) {
                 throw new IllegalArgumentException("로또 번호는 6개여야 합니다.");
