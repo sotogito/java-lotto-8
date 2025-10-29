@@ -2,7 +2,8 @@ package lotto.domain.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import lotto.domain.port.LottoNumberMakerPort;
+import java.util.stream.Collectors;
+import lotto.domain.port.outbound.LottoNumberMakerPort;
 
 public class PurchasedLottos {
     private final List<Lotto> lottos;
@@ -23,6 +24,13 @@ public class PurchasedLottos {
             }
         }
         return new PurchasedLottos(purchasedLottos);
+    }
+
+    @Override
+    public String toString() {
+        return lottos.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 
 }
