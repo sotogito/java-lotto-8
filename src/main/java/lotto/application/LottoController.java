@@ -1,6 +1,5 @@
 package lotto.application;
 
-import lotto.application.dto.PurchasedLottoDto;
 import lotto.common.exception.RereadRequestException;
 import lotto.domain.model.PurchasedLottos;
 import lotto.domain.port.inbound.LottoUseCase;
@@ -17,19 +16,18 @@ public class LottoController {
     }
 
     public void run() {
-        PurchasedLottoDto purchasedLottoDto = purchaseLotto();
-        Money money = purchasedLottoDto.money();
-        PurchasedLottos purchasedLottos = purchasedLottoDto.purchasedLottos();
+        Money money = createMoney();
+        PurchasedLottos purchasedLottos = lottoUseCase.purchase(money);
 
         OutputView.writePurchaseLottos(money, purchasedLottos);
 
     }
 
-    private PurchasedLottoDto purchaseLotto() {
+    private Money createMoney() {
         while (true) {
             try {
-                return lottoUseCase.purchase(InputVIew.readPurchaseAmount());
-            }catch (RereadRequestException e) {
+                return lottoUseCase.createMoney(InputVIew.readPurchaseAmount());
+            } catch (RereadRequestException e) {
                 ExceptionHandler.read(e);
             }
         }

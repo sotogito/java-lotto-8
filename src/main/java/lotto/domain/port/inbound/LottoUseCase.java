@@ -1,9 +1,12 @@
 package lotto.domain.port.inbound;
 
-import lotto.application.dto.PurchasedLottoDto;
+import lotto.domain.model.PurchasedLottos;
+import lotto.domain.vo.Money;
 
 public interface LottoUseCase {
 
-    PurchasedLottoDto purchase(Integer amount);
+    Money createMoney(Integer amount);
+
+    PurchasedLottos purchase(Money money);
 
 }
