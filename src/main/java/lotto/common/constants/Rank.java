@@ -1,5 +1,8 @@
 package lotto.common.constants;
 
+import java.util.EnumMap;
+import java.util.Map;
+
 public enum Rank {
     FIFTH(5, 3, false, 5_000L),
     FOURTH(4, 4, false, 50_000L),
@@ -20,6 +23,14 @@ public enum Rank {
         this.prizeMoney = prizeMoney;
     }
 
+    public int getMatchCount() {
+        return matchCount;
+    }
+
+    public Long getPrizeMoney() {
+        return prizeMoney;
+    }
+
     public static Rank getRank(int matchCount, boolean hasBonus) {
         if (matchCount == SECOND.matchCount && hasBonus == SECOND.hasBonus) {
             return SECOND;
@@ -31,6 +42,15 @@ public enum Rank {
             }
         }
         return NOTHING;
+    }
+
+    public static Map<Rank, Integer> initRankByCount() {
+        EnumMap<Rank, Integer> ranks = new EnumMap<>(Rank.class);
+
+        for (Rank rank : Rank.values()) {
+            ranks.put(rank, 0);
+        }
+        return ranks;
     }
 
 }

@@ -1,5 +1,7 @@
 package lotto.application;
 
+import java.util.Map;
+import lotto.common.constants.Rank;
 import lotto.common.exception.RereadRequestException;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.PurchasedLottos;
@@ -20,10 +22,13 @@ public class LottoController {
     public void run() {
         Money money = createMoney();
         PurchasedLottos purchasedLottos = lottoUseCase.purchase(money);
-
         OutputView.writePurchaseLottos(money, purchasedLottos);
 
         UserLotto userLotto = createUseLotto();
+        Map<Rank, Integer> winningStatistics =
+                lottoUseCase.getWinningStatistics(userLotto, purchasedLottos);
+        OutputView.writeWinningStatistics(winningStatistics);
+
     }
 
     private Money createMoney() {
