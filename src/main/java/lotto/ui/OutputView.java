@@ -1,5 +1,6 @@
 package lotto.ui;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import java.util.StringJoiner;
 import lotto.common.constants.Rank;
@@ -34,9 +35,15 @@ public class OutputView {
                     rank.getMatchCount(), rank.getPrizeMoney(), count));
         }
 
+        System.out.println();
         System.out.println("당첨 통계");
         System.out.println("---");
         System.out.println(result.toString());
+    }
+
+    public static void writeYield(BigDecimal yield) {
+        System.out.println(yield);
+        System.out.printf("총 수익률은 %,.1f%%입니다.", yield.doubleValue());
     }
 
 }

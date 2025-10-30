@@ -1,5 +1,6 @@
 package lotto.domain.service;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import lotto.common.constants.Rank;
 import lotto.domain.model.PurchasedLottos;
@@ -25,6 +26,21 @@ public class LottoService implements LottoUseCase {
     @Override
     public Map<Rank, Integer> getWinningStatistics(UserLotto userLotto, PurchasedLottos purchasedLottos) {
         return purchasedLottos.calculateWinningLotto(userLotto);
+    }
+
+    @Override
+    public BigDecimal calculateYield(Money money, Map<Rank, Integer> winningStatistics) {
+        long totalPrize = 0;
+        for (Map.Entry<Rank, Integer> entry : winningStatistics.entrySet()) {
+            Rank rank = entry.getKey();
+            if(rank.equals(Rank.NOTHING)) {
+                continue;
+            }
+            long prize = rank.getPrizeMoney();
+
+            totalPrize += prize;
+        }
+        return money.calculateYield(totalPrize);
     }
 
 }

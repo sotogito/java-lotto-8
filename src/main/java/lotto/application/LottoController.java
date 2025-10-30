@@ -1,5 +1,6 @@
 package lotto.application;
 
+import java.math.BigDecimal;
 import java.util.Map;
 import lotto.common.constants.Rank;
 import lotto.common.exception.RereadRequestException;
@@ -27,8 +28,9 @@ public class LottoController {
         UserLotto userLotto = createUseLotto();
         Map<Rank, Integer> winningStatistics =
                 lottoUseCase.getWinningStatistics(userLotto, purchasedLottos);
+        BigDecimal yield = lottoUseCase.calculateYield(money, winningStatistics);
         OutputView.writeWinningStatistics(winningStatistics);
-
+        OutputView.writeYield(yield);
     }
 
     private Money createMoney() {
