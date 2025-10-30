@@ -12,6 +12,14 @@ public class UserLotto {
         this.bonusNumber = bonusNumber;
     }
 
+    public int matchMainLotto(Lotto purchasedLotto) {
+        return mainLotto.getMatchingCount(purchasedLotto);
+    }
+
+    public boolean hasBonusNumberFrom(Lotto purchasedLotto) {
+        return purchasedLotto.isContained(bonusNumber);
+    }
+
     public static UserLotto create(Lotto mainLotto, Integer bonusNumber) {
         if (bonusNumber == null) {
             throw new RereadRequestException("보너스 번호를 입력해주세요.");
