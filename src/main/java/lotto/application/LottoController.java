@@ -29,7 +29,7 @@ public class LottoController {
     private Money createMoney() {
         while (true) {
             try {
-                return lottoUseCase.createMoney(InputVIew.readPurchaseAmount());
+                return new Money(InputVIew.readPurchaseAmount());
             } catch (RereadRequestException e) {
                 ExceptionHandler.read(e);
             }
@@ -41,7 +41,7 @@ public class LottoController {
 
         while (true) {
             try {
-                return lottoUseCase.createUserLotto(mainLotto, InputVIew.readBonusNumber());
+                return UserLotto.create(mainLotto, InputVIew.readBonusNumber());
             } catch (RereadRequestException e) {
                 ExceptionHandler.read(e);
             }
@@ -51,7 +51,7 @@ public class LottoController {
     private Lotto createUserMainLotto() {
         while (true) {
             try {
-                return lottoUseCase.createUserMainLotto(InputVIew.readMainLottoNumbers());
+                return new Lotto(InputVIew.readMainLottoNumbers());
             } catch (RereadRequestException e) {
                 ExceptionHandler.read(e);
             }
