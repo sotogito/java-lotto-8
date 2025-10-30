@@ -17,6 +17,15 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    public int getMatchingCount(Lotto otherLotto) {
+        Set<Integer> thisNumbers = new HashSet<>(this.numbers);
+        Set<Integer> otherNumbers = new HashSet<>(otherLotto.numbers);
+
+        thisNumbers.retainAll(otherNumbers);
+
+        return thisNumbers.size();
+    }
+
     public boolean isContained(Integer number) {
         return numbers.contains(number);
     }
