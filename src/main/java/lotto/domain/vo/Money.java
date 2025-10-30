@@ -1,5 +1,7 @@
 package lotto.domain.vo;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import lotto.common.constants.LottoPolicy;
 import lotto.common.exception.RereadRequestException;
 
@@ -14,6 +16,12 @@ public class Money {
 
     public int calculatePurchasedQuantity() {
         return amount / LottoPolicy.LOTTO_PRICE;
+    }
+
+    public BigDecimal calculateYield(long totalPrice) {
+        return BigDecimal.valueOf(totalPrice)
+                .multiply(BigDecimal.valueOf(100))
+                .divide(BigDecimal.valueOf(amount), 1, RoundingMode.HALF_UP);
     }
 
     private void validateAmount(Integer amount) {
