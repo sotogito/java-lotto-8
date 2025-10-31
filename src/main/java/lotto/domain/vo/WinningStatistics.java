@@ -35,7 +35,6 @@ public class WinningStatistics {
             if (rank.equals(Rank.NOTHING)) {
                 continue;
             }
-            System.out.println(rank);
             long prize = rank.getPrizeMoney();
             long count = entry.getValue();
 
