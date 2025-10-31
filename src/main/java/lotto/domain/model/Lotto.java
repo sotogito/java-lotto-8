@@ -38,9 +38,8 @@ public class Lotto {
 
     private void validateNumbersRange(List<Integer> numbers) {
         for (Integer number : numbers) {
-            if (number == null) {
-                throw new RereadRequestException("로또 번호는 6개여야 합니다.");
-            }
+            validateNotNull(number);
+
             if (number < LottoPolicy.LOTTO_MIN_NUMBER
                     || number > LottoPolicy.LOTTO_MAX_NUMBER) {
                 throw new RereadRequestException("로또 번호 범위는 1~45까지 입니다.");
@@ -52,6 +51,12 @@ public class Lotto {
         Set<Integer> noDuplication = new HashSet<>(numbers);
         if (noDuplication.size() != numbers.size()) {
             throw new RereadRequestException("중복된 로또 번호가 있습니다.");
+        }
+    }
+
+    private void validateNotNull(Integer number) {
+        if (number == null) {
+            throw new RereadRequestException("로또 번호는 6개여야 합니다.");
         }
     }
 
