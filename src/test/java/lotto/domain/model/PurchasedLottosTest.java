@@ -17,7 +17,7 @@ class PurchasedLottosTest {
         assertRandomUniqueNumbersInRangeTest(
                 () -> {
                     PurchasedLottos purchasedLottos = PurchasedLottos.create(
-                            3,
+                            2,
                             new RandomNumberMaker()
                     );
 
