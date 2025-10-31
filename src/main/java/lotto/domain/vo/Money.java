@@ -9,7 +9,9 @@ public class Money {
     private final int amount;
 
     public Money(Integer amount) {
-        validateAmount(amount);
+        validateNotNull(amount);
+        validateAmountRange(amount);
+        validateAmountUnit(amount);
 
         this.amount = amount;
     }
@@ -24,18 +26,22 @@ public class Money {
                 .divide(BigDecimal.valueOf(amount), 1, RoundingMode.HALF_UP);
     }
 
-    private void validateAmount(Integer amount) {
+    private void validateNotNull(Integer amount) {
         if (amount == null) {
             throw new RereadRequestException("구매금액이 비어있습니다.");
         }
-        if (amount < LottoPolicy.LOTTO_MIN_PURCHASE_PRICE) {
-            throw new RereadRequestException("로또는 최소 1장 이상 구매해야합니다.");
+    }
+
+    private void validateAmountRange(Integer amount) {
+        if (amount < LottoPolicy.LOTTO_MIN_PURCHASE_PRICE
+                || amount > LottoPolicy.LOTTO_MAX_PURCHASE_PRICE) {
+            throw new RereadRequestException("로또는 1~100장까지 구매할 수 있습니다.");
         }
+    }
+
+    private void validateAmountUnit(Integer amount) {
         if (amount % LottoPolicy.LOTTO_PRICE != 0) {
             throw new RereadRequestException("구매금액은 1,000단위로 입력해주세요.");
-        }
-        if (amount > LottoPolicy.LOTTO_MAX_PURCHASE_PRICE) {
-            throw new RereadRequestException("로또는 100장까지 구매할 수 있습니다.");
         }
     }
 
