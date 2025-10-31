@@ -10,6 +10,16 @@ import org.junit.jupiter.api.Test;
 class MoneyTest {
 
     @Test
+    void 구매_로또_수량_계상() {
+        Money money = new Money(1000);
+
+        int actual = money.calculatePurchasedQuantity();
+        int expected = 1;
+
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
     void 수익률_계산() {
         Money money = new Money(5000);
         long totalPrice = 5000L;
@@ -27,7 +37,7 @@ class MoneyTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("로또는 1000장까지 구매할 수 있다..")
+    @DisplayName("로또는 1000장까지 구매할 수 있다.")
     @Test
     void 구매_로또_수량_예외처리() {
         assertThatThrownBy(() -> new Money(10000000))
