@@ -15,11 +15,20 @@ class PurchasedLottosTest {
 
     @Test
     void 로또_수량에_따른_구매로또_생성() {
-        assertThat(
-                PurchasedLottos.create(
-                        3,
-                        new RandomNumberMaker())
-        ).isNotNull();
+        assertRandomUniqueNumbersInRangeTest(
+                () -> {
+                    PurchasedLottos purchasedLottos = PurchasedLottos.create(
+                            3,
+                            new RandomNumberMaker()
+                    );
+
+                    assertThat(purchasedLottos.toString())
+                            .contains("[1, 2, 3, 4, 5, 6]"
+                                    , "[6, 7, 8, 9, 10, 11]");
+                },
+                List.of(1, 2, 3, 4, 5, 6),
+                List.of(6, 7, 8, 9, 10, 11)
+        );
     }
 
     @Test
