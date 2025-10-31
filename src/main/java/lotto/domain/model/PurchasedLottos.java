@@ -15,6 +15,15 @@ public class PurchasedLottos {
         this.lottos = lottos;
     }
 
+    public static PurchasedLottos create(int purchasedQuantity, LottoNumberMakerPort lottoNumberMaker) {
+        List<Lotto> purchasedLottos = new ArrayList<>();
+
+        for (int i = 0; i < purchasedQuantity; i++) {
+            purchasedLottos.add(new Lotto(lottoNumberMaker.make()));
+        }
+        return new PurchasedLottos(purchasedLottos);
+    }
+
     public WinningStatistics calculateWinningLotto(UserLotto userLotto) {
         EnumMap<Rank, Integer> winningLottos = new EnumMap<>(Rank.class);
 
@@ -30,15 +39,6 @@ public class PurchasedLottos {
             winningLottos.merge(rank, 1, Integer::sum);
         }
         return new WinningStatistics(winningLottos);
-    }
-
-    public static PurchasedLottos create(int purchasedQuantity, LottoNumberMakerPort lottoNumberMaker) {
-        List<Lotto> purchasedLottos = new ArrayList<>();
-
-        for (int i = 0; i < purchasedQuantity; i++) {
-            purchasedLottos.add(new Lotto(lottoNumberMaker.make()));
-        }
-        return new PurchasedLottos(purchasedLottos);
     }
 
     @Override
