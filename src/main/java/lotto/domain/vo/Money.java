@@ -3,6 +3,7 @@ package lotto.domain.vo;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import lotto.common.constants.LottoPolicy;
+import lotto.common.constants.YieldPolicy;
 import lotto.common.exception.RereadRequestException;
 
 public class Money {
@@ -23,7 +24,7 @@ public class Money {
     public BigDecimal calculateYield(long totalPrice) {
         return BigDecimal.valueOf(totalPrice)
                 .multiply(BigDecimal.valueOf(100))
-                .divide(BigDecimal.valueOf(amount), 1, RoundingMode.HALF_UP);
+                .divide(BigDecimal.valueOf(amount), YieldPolicy.SCALE, RoundingMode.HALF_UP);
     }
 
     private void validateNotNull(Integer amount) {
