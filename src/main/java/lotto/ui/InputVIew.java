@@ -39,6 +39,10 @@ public class InputVIew {
         }
     }
 
+    public static void consoleClose() {
+        Console.close();
+    }
+
     private static String read() {
         try {
             String input = Console.readLine().trim();

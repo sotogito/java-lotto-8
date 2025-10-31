@@ -30,6 +30,8 @@ public class LottoController {
         BigDecimal yield = lottoUseCase.calculateYield(money, winningStatistics);
         OutputView.writeWinningStatistics(winningStatistics);
         OutputView.writeYield(yield);
+
+        InputVIew.consoleClose();
     }
 
     private Money createMoney() {

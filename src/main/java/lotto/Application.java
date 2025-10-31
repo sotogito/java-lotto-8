@@ -9,7 +9,7 @@ public class Application {
     public static void main(String[] args) {
 
         LottoUseCase lottoUseCase = new LottoService(new RandomNumberMaker());
-        LottoController  lottoController = new LottoController(lottoUseCase);
+        LottoController lottoController = new LottoController(lottoUseCase);
         lottoController.run();
     }
 
