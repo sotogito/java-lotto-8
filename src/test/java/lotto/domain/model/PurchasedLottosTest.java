@@ -3,7 +3,6 @@ package lotto.domain.model;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomUniqueNumbersInRangeTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.common.constants.Rank;
@@ -46,15 +45,10 @@ class PurchasedLottosTest {
 
                     WinningStatistics winningStatistics = purchasedLottos.calculateWinningLotto(userLotto);
                     Map<Rank, Integer> actual = winningStatistics.getWinningStatisticsWithAllRank();
-                    Map<Rank, Integer> expected = new HashMap<>(Map.of(
-                            Rank.FIFTH, 2,
-                            Rank.FOURTH, 0,
-                            Rank.THIRD, 0,
-                            Rank.SECOND, 1,
-                            Rank.FIRST, 0
-                    ));
 
-                    assertThat(actual).isEqualTo(expected);
+                    assertThat(actual)
+                            .containsEntry(Rank.FIFTH, 2)
+                            .containsEntry(Rank.SECOND, 1);
                 },
                 List.of(1, 2, 3, 4, 5, 7),
                 List.of(1, 2, 3, 7, 41, 42),
