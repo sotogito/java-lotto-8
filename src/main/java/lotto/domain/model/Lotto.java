@@ -40,8 +40,8 @@ public class Lotto {
         for (Integer number : numbers) {
             validateNotNull(number);
 
-            if (number < LottoPolicy.LOTTO_MIN_NUMBER
-                    || number > LottoPolicy.LOTTO_MAX_NUMBER) {
+            if (number < LottoPolicy.MIN_NUMBER
+                    || number > LottoPolicy.MAX_NUMBER) {
                 throw new RereadRequestException("로또 번호 범위는 1~45까지 입니다.");
             }
         }

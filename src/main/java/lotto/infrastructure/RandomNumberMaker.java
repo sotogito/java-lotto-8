@@ -11,8 +11,8 @@ public class RandomNumberMaker implements LottoNumberMakerPort {
     public List<Integer> make() {
         try {
             return Randoms.pickUniqueNumbersInRange(
-                    LottoPolicy.LOTTO_MIN_NUMBER,
-                    LottoPolicy.LOTTO_MAX_NUMBER,
+                    LottoPolicy.MIN_NUMBER,
+                    LottoPolicy.MAX_NUMBER,
                     LottoPolicy.MAIN_LOTTO_NUMBER_COUNT
             );
         } catch (IllegalArgumentException e) {

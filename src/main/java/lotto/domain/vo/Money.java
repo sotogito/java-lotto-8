@@ -18,7 +18,7 @@ public class Money {
     }
 
     public int calculatePurchasedQuantity() {
-        return amount / LottoPolicy.LOTTO_PRICE;
+        return amount / LottoPolicy.PRICE;
     }
 
     public BigDecimal calculateYield(long totalPrice) {
@@ -34,14 +34,14 @@ public class Money {
     }
 
     private void validateAmountRange(Integer amount) {
-        if (amount < LottoPolicy.LOTTO_MIN_PURCHASE_PRICE
-                || amount > LottoPolicy.LOTTO_MAX_PURCHASE_PRICE) {
+        if (amount < LottoPolicy.MIN_PURCHASE_PRICE
+                || amount > LottoPolicy.MAX_PURCHASE_PRICE) {
             throw new RereadRequestException("로또는 1~100장까지 구매할 수 있습니다.");
         }
     }
 
     private void validateAmountUnit(Integer amount) {
-        if (amount % LottoPolicy.LOTTO_PRICE != 0) {
+        if (amount % LottoPolicy.PRICE != 0) {
             throw new RereadRequestException("구매금액은 1,000단위로 입력해주세요.");
         }
     }

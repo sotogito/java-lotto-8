@@ -38,8 +38,8 @@ public class UserLotto {
     }
 
     private static void validateBonusNumberRange(Integer bonusNumber) {
-        if (bonusNumber < LottoPolicy.LOTTO_MIN_NUMBER
-                || bonusNumber > LottoPolicy.LOTTO_MAX_NUMBER) {
+        if (bonusNumber < LottoPolicy.MIN_NUMBER
+                || bonusNumber > LottoPolicy.MAX_NUMBER) {
             throw new RereadRequestException("로또 번호 범위는 1~45까지 입니다.");
         }
     }
