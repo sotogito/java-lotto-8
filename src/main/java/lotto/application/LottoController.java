@@ -1,14 +1,13 @@
 package lotto.application;
 
 import java.math.BigDecimal;
-import java.util.Map;
-import lotto.common.constants.Rank;
 import lotto.common.exception.RereadRequestException;
 import lotto.domain.model.Lotto;
 import lotto.domain.model.PurchasedLottos;
 import lotto.domain.model.UserLotto;
 import lotto.domain.port.inbound.LottoUseCase;
 import lotto.domain.vo.Money;
+import lotto.domain.vo.WinningStatistics;
 import lotto.ui.ExceptionHandler;
 import lotto.ui.InputVIew;
 import lotto.ui.OutputView;
@@ -26,7 +25,7 @@ public class LottoController {
         OutputView.writePurchaseLottos(money, purchasedLottos);
 
         UserLotto userLotto = createUseLotto();
-        Map<Rank, Integer> winningStatistics =
+        WinningStatistics winningStatistics =
                 lottoUseCase.getWinningStatistics(userLotto, purchasedLottos);
         BigDecimal yield = lottoUseCase.calculateYield(money, winningStatistics);
         OutputView.writeWinningStatistics(winningStatistics);

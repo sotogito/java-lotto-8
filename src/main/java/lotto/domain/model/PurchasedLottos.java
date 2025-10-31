@@ -1,13 +1,12 @@
 package lotto.domain.model;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import lotto.common.constants.Rank;
 import lotto.domain.port.outbound.LottoNumberMakerPort;
+import lotto.domain.vo.WinningStatistics;
 
 public class PurchasedLottos {
     private final List<Lotto> lottos;
@@ -16,18 +15,21 @@ public class PurchasedLottos {
         this.lottos = lottos;
     }
 
-    public Map<Rank, Integer> calculateWinningLotto(UserLotto userLotto) {
+    public WinningStatistics calculateWinningLotto(UserLotto userLotto) {
         EnumMap<Rank, Integer> winningLottos = new EnumMap<>(Rank.class);
 
         for (Lotto purchasedLotto : lottos) {
             int matchingMainLottoCount = userLotto.matchMainLotto(purchasedLotto);
             boolean hasBonusNumber = userLotto.hasBonusNumberFrom(purchasedLotto);
+
             Rank rank = Rank.getRank(matchingMainLottoCount, hasBonusNumber);
+            if (rank.equals(Rank.NOTHING)) {
+                continue;
+            }
 
             winningLottos.merge(rank, 1, Integer::sum);
         }
-
-        return Collections.unmodifiableMap(winningLottos);
+        return new WinningStatistics(winningLottos);
     }
 
     public static PurchasedLottos create(int purchasedQuantity, LottoNumberMakerPort lottoNumberMaker) {

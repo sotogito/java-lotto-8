@@ -1,18 +1,17 @@
 package lotto.domain.port.inbound;
 
 import java.math.BigDecimal;
-import java.util.Map;
-import lotto.common.constants.Rank;
 import lotto.domain.model.PurchasedLottos;
 import lotto.domain.model.UserLotto;
 import lotto.domain.vo.Money;
+import lotto.domain.vo.WinningStatistics;
 
 public interface LottoUseCase {
 
     PurchasedLottos purchase(Money money);
 
-    Map<Rank, Integer> getWinningStatistics(UserLotto userLotto, PurchasedLottos purchasedLottos);
+    WinningStatistics getWinningStatistics(UserLotto userLotto, PurchasedLottos purchasedLottos);
 
-    BigDecimal calculateYield(Money money, Map<Rank, Integer> winningStatistics);
+    BigDecimal calculateYield(Money money, WinningStatistics winningStatistics);
 
 }

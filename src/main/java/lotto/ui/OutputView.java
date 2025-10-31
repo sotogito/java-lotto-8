@@ -6,6 +6,7 @@ import java.util.StringJoiner;
 import lotto.common.constants.Rank;
 import lotto.domain.model.PurchasedLottos;
 import lotto.domain.vo.Money;
+import lotto.domain.vo.WinningStatistics;
 
 public class OutputView {
 
@@ -15,21 +16,18 @@ public class OutputView {
         System.out.println(purchasedLottos.toString());
     }
 
-    public static void writeWinningStatistics(Map<Rank, Integer> winningStatistics) {
+    public static void writeWinningStatistics(WinningStatistics winningStatistics) {
         StringJoiner result = new StringJoiner("\n");
 
-        for (Map.Entry<Rank, Integer> entry : Rank.initRankByCount().entrySet()) {
+        Map<Rank, Integer> allRank = winningStatistics.getWinningStatisticsWithAllRank();
+        for (Map.Entry<Rank, Integer> entry : allRank.entrySet()) {
             Rank rank = entry.getKey();
             Integer count = entry.getValue();
-            if (rank.equals(Rank.NOTHING)) {
-                continue;
-            }
-            if (winningStatistics.containsKey(rank)) {
-                count = winningStatistics.get(rank);
-            }
+
             if (rank.equals(Rank.SECOND)) {
                 result.add(String.format("%,d개 일치, 보너스 볼 일치 (%,d원) - %,d개",
                         rank.getMatchCount(), rank.getPrizeMoney(), count));
+                continue;
             }
             result.add(String.format("%,d개 일치 (%,d원) - %,d개",
                     rank.getMatchCount(), rank.getPrizeMoney(), count));
@@ -42,7 +40,6 @@ public class OutputView {
     }
 
     public static void writeYield(BigDecimal yield) {
-        System.out.println(yield);
         System.out.printf("총 수익률은 %,.1f%%입니다.", yield.doubleValue());
     }
 
