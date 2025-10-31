@@ -14,6 +14,7 @@ public class OutputView {
         System.out.println();
         System.out.printf("%,d개를 구매했습니다.\n", money.calculatePurchasedQuantity());
         System.out.println(purchasedLottos.toString());
+        System.out.println();
     }
 
     public static void writeWinningStatistics(WinningStatistics winningStatistics) {

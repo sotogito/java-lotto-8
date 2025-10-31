@@ -3,7 +3,7 @@ package lotto.domain.model;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.StringJoiner;
 import lotto.common.constants.Rank;
 import lotto.domain.port.outbound.LottoNumberMakerPort;
 import lotto.domain.vo.WinningStatistics;
@@ -43,9 +43,10 @@ public class PurchasedLottos {
 
     @Override
     public String toString() {
-        return lottos.stream()
-                .map(Lotto::toString)
-                .collect(Collectors.joining("\n"));
+        StringJoiner result = new StringJoiner("\n");
+        lottos.forEach(lotto -> result.add(lotto.toString()));
+
+        return result.toString();
     }
 
 }

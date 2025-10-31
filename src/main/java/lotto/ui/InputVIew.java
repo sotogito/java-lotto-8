@@ -30,6 +30,7 @@ public class InputVIew {
 
     public static int readBonusNumber() {
         try {
+            System.out.println();
             System.out.println("보너스 번호를 입력해 주세요.");
 
             return Integer.parseInt(read());
