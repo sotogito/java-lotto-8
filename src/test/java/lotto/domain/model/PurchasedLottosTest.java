@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lotto.common.constants.Rank;
+import lotto.domain.vo.WinningStatistics;
 import lotto.infrastructure.RandomNumberMaker;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PurchasedLottosTest {
@@ -22,9 +22,8 @@ class PurchasedLottosTest {
         ).isNotNull();
     }
 
-    @DisplayName("매칭 결과를 EnumMap<Rank, Integer> 형태로 반환한다.")
     @Test
-    void 사용자_로또와_구매_로도_매칭_결과_반환() {
+    void 사용자_로또와_구매_로또_매칭_결과_반환() {
         assertRandomUniqueNumbersInRangeTest(
                 () -> {
                     UserLotto userLotto = UserLotto.create(
@@ -36,10 +35,14 @@ class PurchasedLottosTest {
                             new RandomNumberMaker()
                     );
 
-                    Map<Rank, Integer> actual = purchasedLottos.calculateWinningLotto(userLotto);
+                    WinningStatistics winningStatistics = purchasedLottos.calculateWinningLotto(userLotto);
+                    Map<Rank, Integer> actual = winningStatistics.getWinningStatisticsWithAllRank();
                     Map<Rank, Integer> expected = new HashMap<>(Map.of(
+                            Rank.FIFTH, 2,
+                            Rank.FOURTH, 0,
+                            Rank.THIRD, 0,
                             Rank.SECOND, 1,
-                            Rank.FIFTH, 2
+                            Rank.FIRST, 0
                     ));
 
                     assertThat(actual).isEqualTo(expected);
