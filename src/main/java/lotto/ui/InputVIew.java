@@ -4,38 +4,42 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import lotto.common.exception.LottoError;
 import lotto.common.exception.RereadRequestException;
 
 public class InputVIew {
+    private final static String READ_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
+    private final static String READ_MAIN_LOTTO_NUMBERS = "당첨 번호를 입력해 주세요.";
+    private final static String READ_BONUS_NUMBER = "보너스 번호를 입력해 주세요.";
 
     public static int readPurchaseAmount() {
         try {
-            System.out.println("구입금액을 입력해 주세요.");
+            System.out.println(READ_PURCHASE_AMOUNT);
 
             return Integer.parseInt(read());
         } catch (NumberFormatException e) {
-            throw new RereadRequestException("구매 금액을 숫자로 입력해주세요.");
+            throw new RereadRequestException(LottoError.INPUT_NOT_NUMBER);
         }
     }
 
     public static List<Integer> readMainLottoNumbers() {
         try {
-            System.out.println("당첨 번호를 입력해 주세요.");
+            System.out.println(READ_MAIN_LOTTO_NUMBERS);
 
             return parseNumbers(read());
         } catch (NumberFormatException e) {
-            throw new RereadRequestException("로또 번호를 숫자로 입력해주세요.");
+            throw new RereadRequestException(LottoError.INPUT_NOT_NUMBER);
         }
     }
 
     public static int readBonusNumber() {
         try {
             System.out.println();
-            System.out.println("보너스 번호를 입력해 주세요.");
+            System.out.println(READ_BONUS_NUMBER);
 
             return Integer.parseInt(read());
         } catch (NumberFormatException e) {
-            throw new RereadRequestException("보너스 번호를 숫자로 입력해주세요.");
+            throw new RereadRequestException(LottoError.INPUT_NOT_NUMBER);
         }
     }
 
@@ -47,12 +51,11 @@ public class InputVIew {
         try {
             String input = Console.readLine().trim();
             if (input.isEmpty()) {
-                throw new RereadRequestException("잘못된 입력입니다.");
+                throw new RereadRequestException(LottoError.INVALID_INPUT);
             }
-
             return input;
         } catch (NullPointerException e) {
-            throw new RereadRequestException("잘못된 입력입니다.");
+            throw new RereadRequestException(LottoError.INVALID_INPUT);
         }
     }
 

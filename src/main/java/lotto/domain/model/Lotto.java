@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import lotto.common.constants.LottoPolicy;
+import lotto.common.exception.LottoError;
 import lotto.common.exception.RereadRequestException;
 import lotto.common.util.NumberValidator;
 
@@ -34,19 +35,21 @@ public class Lotto {
     private void validateNumberSize(List<Integer> numbers) {
         if (!NumberValidator.allNotNull(numbers)
                 || !NumberValidator.hasExactSize(numbers, LottoPolicy.MAIN_LOTTO_NUMBER_COUNT)) {
-            throw new RereadRequestException("로또 번호는 6개여야 합니다.");
+            throw new RereadRequestException(LottoError.INVALID_LOTTO_NUMBER_COUNT,
+                    LottoPolicy.MAIN_LOTTO_NUMBER_COUNT);
         }
     }
 
     private void validateNumbersRange(List<Integer> numbers) {
         if (!NumberValidator.allInRange(numbers, LottoPolicy.MIN_NUMBER, LottoPolicy.MAX_NUMBER)) {
-            throw new RereadRequestException("로또 번호 범위는 1~45까지 입니다.");
+            throw new RereadRequestException(LottoError.INVALID_LOTTO_RANGE,
+                    LottoPolicy.MIN_NUMBER, LottoPolicy.MAX_NUMBER);
         }
     }
 
     private void validateDuplicationNumbers(List<Integer> numbers) {
         if (!NumberValidator.hasDuplicate(numbers)) {
-            throw new RereadRequestException("중복된 로또 번호가 있습니다.");
+            throw new RereadRequestException(LottoError.DUPLICATION_LOTTO_NUMBER);
         }
     }
 

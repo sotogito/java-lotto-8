@@ -1,6 +1,8 @@
 package lotto.domain.model;
 
 import lotto.common.constants.LottoPolicy;
+import lotto.common.exception.BusinessException;
+import lotto.common.exception.LottoError;
 import lotto.common.exception.RereadRequestException;
 import lotto.common.util.NumberValidator;
 
@@ -31,22 +33,23 @@ public class UserLotto {
 
     private static void validateNotNull(Lotto mainLotto, Integer bonusNumber) {
         if (mainLotto == null) {
-            throw new IllegalArgumentException("예기치 못한 오류가 발생했습니다.");
+            throw new BusinessException(LottoError.GENERAL_ERROR);
         }
         if (!NumberValidator.notNull(bonusNumber)) {
-            throw new RereadRequestException("보너스 번호를 입력해주세요.");
+            throw new RereadRequestException(LottoError.EMPTY_BONUS_NUMBER);
         }
     }
 
     private static void validateBonusNumberRange(Integer bonusNumber) {
         if (!NumberValidator.inRange(bonusNumber, LottoPolicy.MIN_NUMBER, LottoPolicy.MAX_NUMBER)) {
-            throw new RereadRequestException("로또 번호 범위는 1~45까지 입니다.");
+            throw new RereadRequestException(LottoError.INVALID_LOTTO_RANGE,
+                    LottoPolicy.MIN_NUMBER, LottoPolicy.MAX_NUMBER);
         }
     }
 
     private static void validateBonusNumberDuplicateWithMainLotto(Lotto mainLotto, Integer bonusNumber) {
         if (mainLotto.isContained(bonusNumber)) {
-            throw new RereadRequestException("보너스 번호와 6자리 로또는 중복될 수 없습니다.");
+            throw new RereadRequestException(LottoError.DUPLICATION_LOTTO_NUMBER);
         }
     }
 

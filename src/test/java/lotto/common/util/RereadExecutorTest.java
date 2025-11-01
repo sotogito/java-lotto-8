@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.function.Supplier;
+import lotto.common.exception.LottoError;
 import lotto.common.exception.RereadRequestException;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ class RereadExecutorTest {
         int[] attempts = {0};
         Supplier<String> supplier = () -> {
             attempts[0]++;
-            throw new RereadRequestException("실패");
+            throw new RereadRequestException(LottoError.GENERAL_ERROR);
         };
 
         assertThatThrownBy(() -> RereadExecutor.execute(supplier))

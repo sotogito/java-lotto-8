@@ -1,6 +1,8 @@
 package lotto.common.util;
 
 import java.util.function.Supplier;
+import lotto.common.exception.BusinessException;
+import lotto.common.exception.LottoError;
 import lotto.common.exception.RereadRequestException;
 import lotto.ui.ExceptionHandler;
 
@@ -19,7 +21,7 @@ public class RereadExecutor {
                 ExceptionHandler.read(e);
             }
         }
-        throw new IllegalArgumentException("너무 많은 재입력을 요청했습니다.");
+        throw new BusinessException(LottoError.TOO_MANY_REQUEST_REINPUT);
     }
 
 }
