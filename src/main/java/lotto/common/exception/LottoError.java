@@ -6,7 +6,7 @@ public enum LottoError {
     INPUT_NOT_NUMBER("숫자로 입력해주세요."),
 
     // purchase money
-    EMPTY_PURCHASED_MONEY("구매금액이 비어있습니다."),
+    EMPTY_PURCHASE_MONEY("구매금액이 비어있습니다."),
     INVALID_PURCHASE_MONEY_RANGE("로또는 %,d~%,d원까지 구매할 수 있습니다."),
     INVALID_PURCHASE_MONEY_UNIT("구매금액은 %,d단위로 입력해주세요."),
 
