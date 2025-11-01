@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import lotto.common.constants.LottoPolicy;
 import lotto.common.exception.RereadRequestException;
+import lotto.common.util.NumberValidator;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -31,32 +32,21 @@ public class Lotto {
     }
 
     private void validateNumberSize(List<Integer> numbers) {
-        if (numbers.size() != LottoPolicy.MAIN_LOTTO_NUMBER_COUNT) {
+        if (!NumberValidator.allNotNull(numbers)
+                || !NumberValidator.hasExactSize(numbers, LottoPolicy.MAIN_LOTTO_NUMBER_COUNT)) {
             throw new RereadRequestException("로또 번호는 6개여야 합니다.");
         }
     }
 
     private void validateNumbersRange(List<Integer> numbers) {
-        for (Integer number : numbers) {
-            validateNotNull(number);
-
-            if (number < LottoPolicy.MIN_NUMBER
-                    || number > LottoPolicy.MAX_NUMBER) {
-                throw new RereadRequestException("로또 번호 범위는 1~45까지 입니다.");
-            }
+        if (!NumberValidator.allInRange(numbers, LottoPolicy.MIN_NUMBER, LottoPolicy.MAX_NUMBER)) {
+            throw new RereadRequestException("로또 번호 범위는 1~45까지 입니다.");
         }
     }
 
     private void validateDuplicationNumbers(List<Integer> numbers) {
-        Set<Integer> noDuplication = new HashSet<>(numbers);
-        if (noDuplication.size() != numbers.size()) {
+        if (!NumberValidator.hasDuplicate(numbers)) {
             throw new RereadRequestException("중복된 로또 번호가 있습니다.");
-        }
-    }
-
-    private void validateNotNull(Integer number) {
-        if (number == null) {
-            throw new RereadRequestException("로또 번호는 6개여야 합니다.");
         }
     }
 

@@ -2,6 +2,7 @@ package lotto.domain.model;
 
 import lotto.common.constants.LottoPolicy;
 import lotto.common.exception.RereadRequestException;
+import lotto.common.util.NumberValidator;
 
 public class UserLotto {
     private final Lotto mainLotto;
@@ -32,14 +33,13 @@ public class UserLotto {
         if (mainLotto == null) {
             throw new IllegalArgumentException("예기치 못한 오류가 발생했습니다.");
         }
-        if (bonusNumber == null) {
+        if (!NumberValidator.notNull(bonusNumber)) {
             throw new RereadRequestException("보너스 번호를 입력해주세요.");
         }
     }
 
     private static void validateBonusNumberRange(Integer bonusNumber) {
-        if (bonusNumber < LottoPolicy.MIN_NUMBER
-                || bonusNumber > LottoPolicy.MAX_NUMBER) {
+        if (!NumberValidator.inRange(bonusNumber, LottoPolicy.MIN_NUMBER, LottoPolicy.MAX_NUMBER)) {
             throw new RereadRequestException("로또 번호 범위는 1~45까지 입니다.");
         }
     }

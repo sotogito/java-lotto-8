@@ -5,6 +5,7 @@ import java.math.RoundingMode;
 import lotto.common.constants.LottoPolicy;
 import lotto.common.constants.YieldPolicy;
 import lotto.common.exception.RereadRequestException;
+import lotto.common.util.NumberValidator;
 
 public class Money {
     private final int amount;
@@ -28,20 +29,19 @@ public class Money {
     }
 
     private void validateNotNull(Integer amount) {
-        if (amount == null) {
+        if (!NumberValidator.notNull(amount)) {
             throw new RereadRequestException("구매금액이 비어있습니다.");
         }
     }
 
     private void validateAmountRange(Integer amount) {
-        if (amount < LottoPolicy.MIN_PURCHASE_PRICE
-                || amount > LottoPolicy.MAX_PURCHASE_PRICE) {
+        if (!NumberValidator.inRange(amount, LottoPolicy.MIN_PURCHASE_PRICE, LottoPolicy.MAX_PURCHASE_PRICE)) {
             throw new RereadRequestException("로또는 1~100장까지 구매할 수 있습니다.");
         }
     }
 
     private void validateAmountUnit(Integer amount) {
-        if (amount % LottoPolicy.PRICE != 0) {
+        if (!NumberValidator.isDivisibleBy(amount, LottoPolicy.PRICE)) {
             throw new RereadRequestException("구매금액은 1,000단위로 입력해주세요.");
         }
     }
