@@ -28,15 +28,19 @@ public class PurchasedLottos {
         EnumMap<Rank, Integer> winningLottos = new EnumMap<>(Rank.class);
 
         for (Lotto purchasedLotto : lottos) {
-            int matchingMainLottoCount = userLotto.matchMainLotto(purchasedLotto);
-            boolean hasBonusNumber = userLotto.hasBonusNumberFrom(purchasedLotto);
-            Rank rank = Rank.getRank(matchingMainLottoCount, hasBonusNumber);
+            Rank rank = getRank(userLotto, purchasedLotto);
 
             winningLottos.merge(rank, 1, Integer::sum);
         }
         winningLottos.remove(Rank.NOTHING);
-
         return new WinningStatistics(winningLottos);
+    }
+
+    private Rank getRank(UserLotto userLotto, Lotto purchasedLotto) {
+        int matchingMainLottoCount = userLotto.matchMainLotto(purchasedLotto);
+        boolean hasBonusNumber = userLotto.hasBonusNumberFrom(purchasedLotto);
+
+        return Rank.getRank(matchingMainLottoCount, hasBonusNumber);
     }
 
     @Override
