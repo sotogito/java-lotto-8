@@ -17,27 +17,30 @@ public class WinningStatistics {
 
         for (Map.Entry<Rank, Integer> entry : winningStatistics.entrySet()) {
             Rank rank = entry.getKey();
-            long prize = rank.getPrizeMoney();
-            long count = entry.getValue();
+            Integer count = entry.getValue();
 
-            totalPrize += (prize * count);
+            totalPrize += calculatePrize(rank.getPrizeMoney(), count);
         }
         return totalPrize;
     }
 
     public Map<Rank, Integer> getWinningStatisticsWithAllRank() {
-        EnumMap<Rank, Integer> winningStatisticsWithAllRank = Rank.initRankByCount();
-        winningStatisticsWithAllRank.remove(Rank.NOTHING);
+        EnumMap<Rank, Integer> allRank = Rank.initRankByCount();
+        allRank.remove(Rank.NOTHING);
 
         for (Map.Entry<Rank, Integer> entry : winningStatistics.entrySet()) {
             Rank rank = entry.getKey();
             Integer count = entry.getValue();
 
-            if (winningStatisticsWithAllRank.containsKey(rank)) {
-                winningStatisticsWithAllRank.put(rank, count);
+            if (allRank.containsKey(rank)) {
+                allRank.put(rank, count);
             }
         }
-        return Collections.unmodifiableMap(winningStatisticsWithAllRank);
+        return Collections.unmodifiableMap(allRank);
+    }
+
+    private long calculatePrize(long prize, Integer count) {
+        return prize * count;
     }
 
 }
