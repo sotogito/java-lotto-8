@@ -30,14 +30,12 @@ public class PurchasedLottos {
         for (Lotto purchasedLotto : lottos) {
             int matchingMainLottoCount = userLotto.matchMainLotto(purchasedLotto);
             boolean hasBonusNumber = userLotto.hasBonusNumberFrom(purchasedLotto);
-
             Rank rank = Rank.getRank(matchingMainLottoCount, hasBonusNumber);
-            if (rank.equals(Rank.NOTHING)) {
-                continue;
-            }
 
             winningLottos.merge(rank, 1, Integer::sum);
         }
+        winningLottos.remove(Rank.NOTHING);
+
         return new WinningStatistics(winningLottos);
     }
 

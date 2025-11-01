@@ -12,6 +12,19 @@ public class WinningStatistics {
         this.winningStatistics = winningStatistics;
     }
 
+    public long calculateTotalPrize() {
+        long totalPrize = 0;
+
+        for (Map.Entry<Rank, Integer> entry : winningStatistics.entrySet()) {
+            Rank rank = entry.getKey();
+            long prize = rank.getPrizeMoney();
+            long count = entry.getValue();
+
+            totalPrize += (prize * count);
+        }
+        return totalPrize;
+    }
+
     public Map<Rank, Integer> getWinningStatisticsWithAllRank() {
         EnumMap<Rank, Integer> winningStatisticsWithAllRank = Rank.initRankByCount();
         winningStatisticsWithAllRank.remove(Rank.NOTHING);
@@ -25,22 +38,6 @@ public class WinningStatistics {
             }
         }
         return Collections.unmodifiableMap(winningStatisticsWithAllRank);
-    }
-
-    public long calculateTotalPrize() {
-        long totalPrize = 0;
-
-        for (Map.Entry<Rank, Integer> entry : winningStatistics.entrySet()) {
-            Rank rank = entry.getKey();
-            if (rank.equals(Rank.NOTHING)) {
-                continue;
-            }
-            long prize = rank.getPrizeMoney();
-            long count = entry.getValue();
-
-            totalPrize += (prize * count);
-        }
-        return totalPrize;
     }
 
 }
