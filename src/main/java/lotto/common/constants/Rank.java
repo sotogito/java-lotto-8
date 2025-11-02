@@ -3,11 +3,11 @@ package lotto.common.constants;
 import java.util.EnumMap;
 
 public enum Rank {
-    FIFTH(5, 3, false, 5_000L),
-    FOURTH(4, 4, false, 50_000L),
-    THIRD(3, 5, false, 1_500_000L),
-    SECOND(2, 5, true, 30_000_000L),
-    FIRST(1, 6, false, 2_000_000_000L),
+    FIFTH(5, 3, false, 5_000L), //5천원
+    FOURTH(4, 4, false, 50_000L), //5만원
+    THIRD(3, 5, false, 1_500_000L), //150만원
+    SECOND(2, 5, true, 30_000_000L), //3천만원
+    FIRST(1, 6, false, 2_000_000_000L), //20억원
     NOTHING(-1, 0, false, 0L);
 
     private final int rank;
